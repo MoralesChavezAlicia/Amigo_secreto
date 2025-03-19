@@ -9,8 +9,28 @@ function asignarTextoElemento(elemento, texto) {
 
 function agregarAmigo(){
 let amigoUsuario = document.getElementById('amigo').value;
-listadAmigos.push(amigoUsuario);
-console.log (listadAmigos);
+
+
+if (amigoUsuario==""){
+    alert("Ingresa solo nombres validos");
+    return;
+}
+
+const soloNombres = /[123456789áéíóúñÑÁÉÍÓÚ.*+-\\/]/.test(amigoUsuario);
+if (soloNombres){
+    alert("Ingresa solo nombres validos, letras y espacios");
+    limpiar();
+    return;
+}
+    
+else{
+    listadAmigos.push(amigoUsuario);
+    console.log (listadAmigos);
+}
+
+
+limpiar();
+
 let mostrarlos = listadAmigos.join(', ');
 asignarTextoElemento('ul', mostrarlos);
 amigoUsuario++;
@@ -19,19 +39,17 @@ return;
 }
 
 
+function limpiar (){
+    document.querySelector('#amigo').value="";
+}
 
-/*
-function listaAmigos(){
-let ul = document.getElementById('listaAmigos').value;
-ul.innerHTML = amigos;
-}*/
+function sortearAmigo(){
+    let sorteado = Math.floor(Math.random()*listadAmigos.length);
+    let nombreSorteado = listadAmigos[sorteado];
+    console.log ("El nombre sorteado es: " + nombreSorteado)
+    asignarTextoElemento("ul", `El amigo secreto es: ${nombreSorteado}`);
 
-//listaAmigos();
-//amigos++;
+}
 
-//agregarAmigo();
-//f<unction mostrarLista (){
 
-//}
-//mostrarLista();
 
